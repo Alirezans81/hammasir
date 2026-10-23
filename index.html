@@ -1,0 +1,1650 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>هم‌مسیر | تحلیل هوشمند ایده کسب‌وکار</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap");
+      :root {
+        --bg: #f6f7fb;
+        --surface: #fff;
+        --ink: #182230;
+        --muted: #6c7788;
+        --line: #e6e9f0;
+        --primary: #6658e8;
+        --primary2: #eeeaff;
+        --green: #16866b;
+        --greenbg: #e7f7f1;
+        --amber: #a96808;
+        --amberbg: #fff4dd;
+        --red: #bd4d58;
+        --redbg: #fff0f1;
+        --shadow: 0 12px 35px rgba(32, 40, 70, 0.06);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        font-family: "Vazirmatn", Tahoma, sans-serif;
+        color: var(--ink);
+        line-height: 1.75;
+      }
+      button,
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      .app {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 250px minmax(0, 1fr);
+      }
+      aside {
+        background: #fff;
+        border-left: 1px solid var(--line);
+        padding: 26px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 8px;
+      }
+      .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 13px;
+        background: linear-gradient(135deg, #786bf4, #5143d0);
+        color: white;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 20px;
+        box-shadow: 0 7px 18px #6658e833;
+      }
+      .brand-name {
+        font-weight: 800;
+        font-size: 18px;
+      }
+      .brand-sub {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: -5px;
+      }
+      .nav-label {
+        font-size: 11px;
+        color: #9aa2b1;
+        font-weight: 700;
+        padding: 0 12px;
+        margin-bottom: 7px;
+      }
+      .nav {
+        display: grid;
+        gap: 5px;
+      }
+      .nav button {
+        border: 0;
+        background: transparent;
+        text-align: right;
+        padding: 11px 13px;
+        border-radius: 11px;
+        color: #647083;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-size: 13px;
+      }
+      .nav button.active {
+        background: var(--primary2);
+        color: var(--primary);
+        font-weight: 700;
+      }
+      .nav .ico {
+        width: 20px;
+        text-align: center;
+        font-size: 17px;
+      }
+      .side-bottom {
+        margin-top: auto;
+      }
+      .help {
+        background: #f7f6ff;
+        border: 1px solid #e8e4ff;
+        border-radius: 15px;
+        padding: 15px;
+        font-size: 12px;
+        color: #6d659d;
+      }
+      .help strong {
+        display: block;
+        color: #4c42aa;
+        margin-bottom: 5px;
+      }
+      .profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 7px 0;
+        border-top: 1px solid var(--line);
+        font-size: 12px;
+      }
+      .avatar {
+        width: 35px;
+        height: 35px;
+        background: #e5e1ff;
+        color: #5849d6;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+      .profile small {
+        display: block;
+        color: var(--muted);
+      }
+      main {
+        min-width: 0;
+        padding: 30px clamp(18px, 4vw, 52px) 55px;
+        max-width: 1450px;
+        width: 100%;
+        margin: auto;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 26px;
+      }
+      .crumb {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .demo-tag {
+        font-size: 11px;
+        background: #fff2d8;
+        color: #98620e;
+        border: 1px solid #f2dfb6;
+        border-radius: 20px;
+        padding: 5px 10px;
+      }
+      .icon-btn {
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        color: #687385;
+      }
+      .welcome {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+      .eyebrow {
+        font-size: 12px;
+        color: var(--primary);
+        font-weight: 700;
+        display: flex;
+        gap: 7px;
+        align-items: center;
+      }
+      .eyebrow:before {
+        content: "";
+        display: block;
+        width: 7px;
+        height: 7px;
+        background: var(--primary);
+        border-radius: 50%;
+      }
+      h1 {
+        font-size: clamp(24px, 3vw, 32px);
+        line-height: 1.45;
+        margin: 8px 0 7px;
+        letter-spacing: -0.5px;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 0;
+        max-width: 650px;
+      }
+      .btn {
+        border: 0;
+        border-radius: 11px;
+        padding: 11px 17px;
+        font-weight: 700;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: 0.15s;
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 7px 18px #6658e82b;
+      }
+      .btn-primary:hover {
+        background: #5547d8;
+        transform: translateY(-1px);
+      }
+      .btn-outline {
+        background: white;
+        border: 1px solid var(--line);
+        color: #475367;
+      }
+      .btn-soft {
+        background: var(--primary2);
+        color: var(--primary);
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+      .stat {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        padding: 17px 18px;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+      }
+      .stat-icon {
+        width: 43px;
+        height: 43px;
+        border-radius: 13px;
+        background: #f0eeff;
+        color: var(--primary);
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+      }
+      .stat:nth-child(2) .stat-icon {
+        background: #e7f7f1;
+        color: var(--green);
+      }
+      .stat:nth-child(3) .stat-icon {
+        background: #fff3e4;
+        color: #bd7917;
+      }
+      .stat small {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .stat strong {
+        font-size: 22px;
+        line-height: 1.3;
+        display: block;
+      }
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+        gap: 18px;
+        align-items: start;
+      }
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 17px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .panel-head {
+        padding: 20px 22px 15px;
+        border-bottom: 1px solid #f0f1f5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .panel-title {
+        font-weight: 800;
+        font-size: 15px;
+      }
+      .panel-desc {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+      .step {
+        font-size: 10px;
+        background: #f0eeff;
+        color: var(--primary);
+        border-radius: 7px;
+        padding: 5px 9px;
+        white-space: nowrap;
+      }
+      .panel-body {
+        padding: 21px 22px;
+      }
+      .field-label {
+        font-size: 12px;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 8px;
+      }
+      .hint {
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 400;
+        margin-right: 5px;
+      }
+      .idea-input {
+        width: 100%;
+        min-height: 142px;
+        resize: vertical;
+        border: 1px solid #dfe3ec;
+        border-radius: 12px;
+        padding: 14px;
+        background: #fcfcfe;
+        outline: none;
+        font-size: 13px;
+        line-height: 2;
+        color: var(--ink);
+      }
+      .idea-input:focus,
+      .text-input:focus,
+      select:focus {
+        border-color: #9d95f5;
+        box-shadow: 0 0 0 3px #6658e814;
+      }
+      .input-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        color: #929bab;
+        margin-top: 7px;
+      }
+      .suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin: 16px 0 20px;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 20px;
+        padding: 6px 10px;
+        font-size: 10px;
+        color: #667184;
+      }
+      .chip:hover {
+        border-color: #b9b2ff;
+        color: var(--primary);
+      }
+      .divider {
+        height: 1px;
+        background: #f0f1f5;
+        margin: 18px 0;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 13px;
+      }
+      .text-input,
+      select {
+        width: 100%;
+        border: 1px solid #dfe3ec;
+        border-radius: 10px;
+        padding: 10px 12px;
+        background: #fff;
+        color: var(--ink);
+        font-size: 12px;
+        outline: none;
+      }
+      .field {
+        margin-bottom: 14px;
+      }
+      .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 19px;
+      }
+      .safe-note {
+        font-size: 10px;
+        color: #929bab;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .side-card {
+        padding: 19px;
+      }
+      .side-card h3 {
+        font-size: 13px;
+        margin: 0 0 13px;
+      }
+      .how-row {
+        display: flex;
+        gap: 11px;
+        margin: 14px 0;
+      }
+      .num {
+        width: 29px;
+        height: 29px;
+        flex: 0 0 29px;
+        border-radius: 9px;
+        background: #f0eeff;
+        color: var(--primary);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 11px;
+      }
+      .how-row strong {
+        display: block;
+        font-size: 11px;
+      }
+      .how-row p {
+        font-size: 10px;
+        color: var(--muted);
+        margin: 2px 0 0;
+        line-height: 1.8;
+      }
+      .mini-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--green);
+        background: var(--greenbg);
+        font-size: 10px;
+        border-radius: 7px;
+        padding: 4px 8px;
+      }
+      .recent {
+        margin-top: 18px;
+      }
+      .recent-item {
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f1f5;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .recent-item:last-child {
+        border: 0;
+      }
+      .recent-icon {
+        width: 35px;
+        height: 35px;
+        background: #f5f4ff;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+      }
+      .recent-item strong {
+        font-size: 11px;
+        display: block;
+      }
+      .recent-item small {
+        font-size: 10px;
+        color: var(--muted);
+      }
+      .status {
+        margin-right: auto;
+        font-size: 10px;
+        color: var(--green);
+        background: var(--greenbg);
+        padding: 3px 7px;
+        border-radius: 6px;
+      }
+      .results {
+        display: none;
+      }
+      .results.show {
+        display: block;
+        animation: fade 0.35s ease;
+      }
+      .intro-result {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 15px;
+        margin: 24px 0 17px;
+      }
+      .intro-result h2 {
+        font-size: 23px;
+        margin: 0 0 4px;
+      }
+      .intro-result p {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 0;
+      }
+      .result-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+        gap: 17px;
+      }
+      .match {
+        display: flex;
+        gap: 13px;
+        padding: 15px 0;
+        border-bottom: 1px solid #f0f1f5;
+      }
+      .match:last-child {
+        border: 0;
+        padding-bottom: 0;
+      }
+      .company-logo {
+        width: 43px;
+        height: 43px;
+        border-radius: 13px;
+        background: #e9f5f2;
+        color: #17775e;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        flex: 0 0 43px;
+      }
+      .match:nth-child(2) .company-logo {
+        background: #fceee3;
+        color: #a96524;
+      }
+      .match:nth-child(3) .company-logo {
+        background: #e9edff;
+        color: #4e5ec2;
+      }
+      .match-main {
+        min-width: 0;
+        flex: 1;
+      }
+      .match-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .match-top strong {
+        font-size: 13px;
+      }
+      .percent {
+        font-size: 11px;
+        color: var(--primary);
+        background: #f0eeff;
+        padding: 4px 8px;
+        border-radius: 8px;
+        white-space: nowrap;
+      }
+      .match p {
+        font-size: 11px;
+        color: var(--muted);
+        margin: 4px 0 8px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .tag {
+        font-size: 9px;
+        padding: 3px 7px;
+        border-radius: 6px;
+        background: #f4f5f8;
+        color: #697385;
+      }
+      .match-link {
+        font-size: 10px;
+        color: var(--primary);
+        margin-top: 8px;
+        display: inline-block;
+        cursor: pointer;
+      }
+      .callout {
+        background: #f8f7ff;
+        border: 1px solid #e8e4ff;
+        border-radius: 12px;
+        padding: 13px 14px;
+        font-size: 11px;
+        color: #645c94;
+        margin-top: 15px;
+      }
+      .callout strong {
+        color: #4e43ac;
+        display: block;
+        margin-bottom: 4px;
+      }
+      .insight-section {
+        margin-top: 18px;
+      }
+      .tabs {
+        display: flex;
+        gap: 5px;
+        padding: 6px;
+        background: #f4f5f9;
+        border-radius: 11px;
+        margin-bottom: 16px;
+        width: max-content;
+        max-width: 100%;
+        overflow: auto;
+      }
+      .tab {
+        border: 0;
+        background: transparent;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 11px;
+        color: #737e90;
+        white-space: nowrap;
+      }
+      .tab.active {
+        background: #fff;
+        color: var(--primary);
+        font-weight: 700;
+        box-shadow: 0 2px 8px #1e293b0c;
+      }
+      .insight-list {
+        display: grid;
+        gap: 11px;
+      }
+      .insight {
+        display: flex;
+        gap: 11px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+      .insight-icon {
+        width: 31px;
+        height: 31px;
+        border-radius: 9px;
+        display: grid;
+        place-items: center;
+        flex: 0 0 31px;
+      }
+      .good .insight-icon {
+        background: var(--greenbg);
+        color: var(--green);
+      }
+      .risk .insight-icon {
+        background: var(--redbg);
+        color: var(--red);
+      }
+      .maybe .insight-icon {
+        background: var(--amberbg);
+        color: var(--amber);
+      }
+      .insight strong {
+        font-size: 12px;
+        display: block;
+      }
+      .insight p {
+        font-size: 11px;
+        color: var(--muted);
+        margin: 3px 0 0;
+      }
+      .evidence {
+        font-size: 9px;
+        color: #8b94a3;
+        margin-top: 5px;
+      }
+      .report-actions {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .disclaimer {
+        font-size: 10px;
+        color: #9098a7;
+        margin-top: 15px;
+      }
+      .new-analysis {
+        margin-right: auto;
+      }
+      .toast {
+        position: fixed;
+        bottom: 22px;
+        left: 22px;
+        background: #202638;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 12px;
+        box-shadow: 0 12px 30px #11182730;
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: 0.25s;
+        z-index: 20;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .loading {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        color: var(--primary);
+        font-size: 12px;
+        margin-top: 13px;
+      }
+      .loading.show {
+        display: flex;
+      }
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #ddd9ff;
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (max-width: 1050px) {
+        .app {
+          grid-template-columns: 210px minmax(0, 1fr);
+        }
+        .workspace,
+        .result-grid {
+          grid-template-columns: 1fr;
+        }
+        .side-column {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 15px;
+        }
+        .recent {
+          margin-top: 0;
+        }
+      }
+      @media (max-width: 720px) {
+        .app {
+          display: block;
+        }
+        aside {
+          display: none;
+        }
+        main {
+          padding: 18px 14px 40px;
+        }
+        .topbar {
+          margin-bottom: 20px;
+        }
+        .welcome {
+          display: block;
+        }
+        .welcome .btn {
+          margin-top: 16px;
+        }
+        .stats {
+          gap: 8px;
+        }
+        .stat {
+          padding: 12px 10px;
+          display: block;
+        }
+        .stat-icon {
+          width: 34px;
+          height: 34px;
+          margin-bottom: 9px;
+        }
+        .stat strong {
+          font-size: 18px;
+        }
+        .stat small {
+          font-size: 10px;
+        }
+        .panel-head,
+        .panel-body {
+          padding: 16px;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .side-column {
+          display: block;
+        }
+        .side-column .panel {
+          margin-bottom: 14px;
+        }
+        .intro-result {
+          display: block;
+        }
+        .intro-result .btn {
+          margin-top: 12px;
+        }
+        .match-top {
+          align-items: flex-start;
+        }
+        .report-actions .btn {
+          flex: 1;
+        }
+        .top-actions .demo-tag {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside>
+        <div class="brand">
+          <div class="logo">ه</div>
+          <div>
+            <div class="brand-name">هم‌مسیر</div>
+            <div class="brand-sub">دستیار هوشمند کسب‌وکار</div>
+          </div>
+        </div>
+        <div>
+          <div class="nav-label">فضای کاری</div>
+          <nav class="nav">
+            <button class="active" data-view="home">
+              <span class="ico">⌂</span> تحلیل ایده جدید</button
+            ><button data-view="results">
+              <span class="ico">◈</span> گزارش‌های من</button
+            ><button data-view="library">
+              <span class="ico">▤</span> بانک کسب‌وکارها
+            </button>
+          </nav>
+        </div>
+        <div>
+          <div class="nav-label">ابزارها</div>
+          <nav class="nav">
+            <button data-view="method">
+              <span class="ico">◎</span> روش تحلیل</button
+            ><button data-view="feedback">
+              <span class="ico">☷</span> بازخورد استاد
+            </button>
+          </nav>
+        </div>
+        <div class="side-bottom">
+          <div class="help">
+            <strong>✦ این یک نمونه نمایشی است</strong>نتایج این صفحه از داده‌های
+            ساختگی ساخته شده‌اند و به سرویس هوش مصنوعی یا وب متصل نیستند.
+          </div>
+          <div class="profile">
+            <div class="avatar">ع‌ن</div>
+            <div>فضای دانشجویی<small>حساب آزمایشی</small></div>
+          </div>
+        </div>
+      </aside>
+      <main>
+        <div class="topbar">
+          <div class="crumb">
+            فضای کاری / <span id="crumb-current">تحلیل ایده جدید</span>
+          </div>
+          <div class="top-actions">
+            <span class="demo-tag">● نسخه نمایشی · داده‌ها ساختگی‌اند</span
+            ><button class="icon-btn" id="helpBtn" aria-label="راهنما">
+              ؟
+            </button>
+          </div>
+        </div>
+        <section id="homeView">
+          <div class="welcome">
+            <div>
+              <div class="eyebrow">از ایده خام تا تصمیم بهتر</div>
+              <h1>ایده‌ات رو بررسی کنیم؟</h1>
+              <p class="subtitle">
+                ایده کسب‌وکارت رو هرطور که توی ذهنت هست بنویس. با چند سؤال
+                تکمیلی، مدل کسب‌وکارت رو می‌سازیم و نمونه‌های مشابه رو بررسی
+                می‌کنیم.
+              </p>
+            </div>
+            <button class="btn btn-outline" id="exampleBtn">
+              ✦ امتحان با یک ایده نمونه
+            </button>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-icon">◈</div>
+              <div><small>مرحله اول</small><strong>شفاف‌سازی ایده</strong></div>
+            </div>
+            <div class="stat">
+              <div class="stat-icon">⌕</div>
+              <div><small>مرحله دوم</small><strong>۳ نمونه مشابه</strong></div>
+            </div>
+            <div class="stat">
+              <div class="stat-icon">▤</div>
+              <div><small>مرحله سوم</small><strong>گزارش تحلیلی</strong></div>
+            </div>
+          </div>
+          <div class="workspace">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <div class="panel-title">۱. ایده‌ات رو تعریف کن</div>
+                  <div class="panel-desc">
+                    لازم نیست از اول همه جزئیات رو بدونی.
+                  </div>
+                </div>
+                <span class="step">گام ۱ از ۳</span>
+              </div>
+              <div class="panel-body">
+                <label class="field-label" for="idea"
+                  >ایده کسب‌وکار
+                  <span class="hint">هرچقدر می‌دونی بنویس</span></label
+                >
+                <textarea
+                  id="idea"
+                  class="idea-input"
+                  placeholder="مثلاً می‌خوام پلتفرمی بسازم که مشتری‌ها بتونن خدمات سالن‌های زیبایی رو ببینن، نمونه‌کارها رو مقایسه کنن و آنلاین نوبت بگیرن... "
+                ></textarea>
+                <div class="input-foot">
+                  <span>✧ ایده‌های ناقص هم قابل بررسی‌اند</span
+                  ><span id="charCount">۰ کاراکتر</span>
+                </div>
+                <div class="suggestions">
+                  <button
+                    class="chip"
+                    data-idea="یک پلتفرم رزرو آنلاین برای سالن‌های زیبایی که مشتری‌ها بتوانند نمونه‌کارها را ببینند و نوبت بگیرند."
+                  >
+                    رزرو سالن زیبایی</button
+                  ><button
+                    class="chip"
+                    data-idea="یک اپلیکیشن برای مدیریت سفارش‌ها و موجودی فروشگاه‌های اینستاگرامی و کاهش خطاهای ثبت سفارش."
+                  >
+                    مدیریت فروشگاه آنلاین</button
+                  ><button
+                    class="chip"
+                    data-idea="سرویسی که با کمک هوش مصنوعی به کاربر نشان می‌دهد مدل مو یا رنگ موی مختلف روی چهره‌اش چه شکلی می‌شود."
+                  >
+                    تجربه زیبایی با هوش مصنوعی
+                  </button>
+                </div>
+                <div class="divider"></div>
+                <div class="form-row">
+                  <div class="field">
+                    <label class="field-label" for="market">بازار هدف</label
+                    ><select id="market">
+                      <option value="ایران، شروع از مشهد">
+                        ایران، شروع از مشهد
+                      </option>
+                      <option>کل ایران</option>
+                      <option>بازار جهانی</option>
+                      <option>هنوز مشخص نیست</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label" for="stage">مرحله ایده</label
+                    ><select id="stage">
+                      <option>فقط ایده اولیه</option>
+                      <option>در حال تحقیق</option>
+                      <option>نمونه اولیه ساخته شده</option>
+                      <option>کسب‌وکار فعال</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <span class="safe-note"
+                    >♧ در این نمونه اطلاعات ذخیره نمی‌شود</span
+                  ><button class="btn btn-primary" id="startBtn">
+                    شروع تحلیل <span>←</span>
+                  </button>
+                </div>
+                <div class="loading" id="loading">
+                  <span class="spinner"></span
+                  ><span>در حال آماده‌سازی نمونه نمایشی...</span>
+                </div>
+              </div>
+            </section>
+            <div class="side-column">
+              <section class="panel side-card">
+                <h3>این سامانه چطور کار می‌کنه؟</h3>
+                <div class="how-row">
+                  <div class="num">۱</div>
+                  <div>
+                    <strong>چند سؤال هوشمند</strong>
+                    <p>
+                      بخش‌های مبهم ایده مشخص می‌شن و فقط درباره همون‌ها سؤال
+                      می‌پرسیم.
+                    </p>
+                  </div>
+                </div>
+                <div class="how-row">
+                  <div class="num">۲</div>
+                  <div>
+                    <strong>پیدا کردن نمونه‌های مشابه</strong>
+                    <p>
+                      ایده با پروفایل کسب‌وکارهای واقعی در بانک اطلاعاتی مقایسه
+                      می‌شه.
+                    </p>
+                  </div>
+                </div>
+                <div class="how-row">
+                  <div class="num">۳</div>
+                  <div>
+                    <strong>تحلیل همراه با شواهد</strong>
+                    <p>
+                      نقاط قوت، ریسک‌ها و فرضیه‌هایی که باید آزمایش بشن، جدا
+                      نمایش داده می‌شن.
+                    </p>
+                  </div>
+                </div>
+                <span class="mini-badge"
+                  >✓ هدف: تحلیل مستند، نه پیش‌گویی موفقیت</span
+                >
+              </section>
+              <section class="panel side-card recent">
+                <h3>تحلیل‌های اخیر <span class="hint">نمونه</span></h3>
+                <div class="recent-item">
+                  <div class="recent-icon">✂</div>
+                  <div>
+                    <strong>پلتفرم خدمات زیبایی</strong
+                    ><small>امروز · نمونه نمایشی</small>
+                  </div>
+                  <span class="status">آماده</span>
+                </div>
+                <div class="recent-item">
+                  <div class="recent-icon">▦</div>
+                  <div>
+                    <strong>مدیریت سفارش آنلاین</strong
+                    ><small>دیروز · نمونه نمایشی</small>
+                  </div>
+                  <span class="status">آماده</span>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+        <section id="questionView" style="display: none">
+          <div class="welcome">
+            <div>
+              <div class="eyebrow">مرحله تکمیلی</div>
+              <h1>چند سؤال کوتاه درباره ایده‌ات</h1>
+              <p class="subtitle">
+                برای اینکه مقایسه‌ها دقیق‌تر باشن، چند بخش مهم رو روشن کنیم.
+                جواب قطعی نداری؟ «هنوز نمی‌دونم» رو انتخاب کن.
+              </p>
+            </div>
+            <span class="step">گام ۲ از ۳</span>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">پروفایل اولیه ایده</div>
+                <div class="panel-desc" id="questionIdeaName">ایده واردشده</div>
+              </div>
+              <button class="btn btn-outline" id="backBtn">ویرایش ایده</button>
+            </div>
+            <div class="panel-body">
+              <div class="field">
+                <label class="field-label">۱. مشتری اصلی این محصول کیه؟</label>
+                <div class="form-row">
+                  <label class="chip"
+                    ><input
+                      type="radio"
+                      name="customer"
+                      value="مشتری نهایی"
+                      checked
+                    />
+                    مشتری نهایی</label
+                  ><label class="chip"
+                    ><input type="radio" name="customer" value="کسب‌وکارها" />
+                    کسب‌وکارها</label
+                  >
+                </div>
+              </div>
+              <div class="field">
+                <label class="field-label"
+                  >۲. مشتری الان این مشکل رو چطور حل می‌کنه؟</label
+                ><input
+                  class="text-input"
+                  id="alternative"
+                  placeholder="مثلاً تماس تلفنی، دایرکت اینستاگرام یا فایل اکسل"
+                />
+              </div>
+              <div class="field">
+                <label class="field-label">۳. درآمد اصلی از کجا میاد؟</label
+                ><select id="revenue">
+                  <option>اشتراک ماهانه</option>
+                  <option>کمیسیون هر تراکنش</option>
+                  <option>اشتراک + کمیسیون</option>
+                  <option>فروش مستقیم</option>
+                  <option>تبلیغات</option>
+                  <option>هنوز نمی‌دانم</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">۴. مهم‌ترین تفاوت ایده‌ات چیه؟</label
+                ><input
+                  class="text-input"
+                  id="difference"
+                  placeholder="مثلاً تمرکز بر بازار محلی یا استفاده از هوش مصنوعی"
+                />
+              </div>
+              <div class="field">
+                <label class="field-label">۵. چه چیزی هنوز برات نامشخصه؟</label
+                ><select id="unknown">
+                  <option>آیا مشتری حاضر است پول بدهد؟</option>
+                  <option>رقبای اصلی چه کسانی هستند؟</option>
+                  <option>چطور اولین مشتری‌ها را جذب کنم؟</option>
+                  <option>هزینه و پیچیدگی فنی</option>
+                  <option>فعلاً مورد خاصی نیست</option>
+                </select>
+              </div>
+              <div class="form-actions">
+                <span class="safe-note"
+                  >می‌تونی جواب بعضی سؤال‌ها رو خالی بذاری.</span
+                ><button class="btn btn-primary" id="analyzeBtn">
+                  ساخت گزارش آزمایشی ←
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="resultsView" class="results">
+          <div class="intro-result">
+            <div>
+              <div class="eyebrow">گزارش تحلیل ایده</div>
+              <h2>ایده‌ات، از چند زاویه</h2>
+              <p id="resultSubtitle">
+                این گزارش نمونه است و باید با منابع واقعی اعتبارسنجی شود.
+              </p>
+            </div>
+            <button class="btn btn-primary" id="downloadBtn">
+              ↓ دریافت گزارش
+            </button>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-icon">◈</div>
+              <div>
+                <small>نمونه‌های بررسی‌شده</small><strong>۳ کسب‌وکار</strong>
+              </div>
+            </div>
+            <div class="stat">
+              <div class="stat-icon">◎</div>
+              <div><small>فرضیه‌های مهم</small><strong>۴ مورد</strong></div>
+            </div>
+            <div class="stat">
+              <div class="stat-icon">⌁</div>
+              <div>
+                <small>سطح اطمینان این نسخه</small><strong>پایین</strong>
+              </div>
+            </div>
+          </div>
+          <div class="result-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <div class="panel-title">نزدیک‌ترین نمونه‌های کسب‌وکار</div>
+                  <div class="panel-desc">
+                    شباهت‌ها بر اساس مشتری، مسئله و مدل درآمدی
+                  </div>
+                </div>
+                <span class="step">رتبه‌بندی آزمایشی</span>
+              </div>
+              <div class="panel-body">
+                <div class="match">
+                  <div class="company-logo">F</div>
+                  <div class="match-main">
+                    <div class="match-top">
+                      <strong id="company1">Fresha</strong
+                      ><span class="percent">شباهت زیاد</span>
+                    </div>
+                    <p>
+                      پلتفرم کشف خدمات زیبایی و رزرو نوبت؛ نمونه‌ای برای بررسی
+                      بازار دوطرفه و ابزارهای سالن.
+                    </p>
+                    <div class="tags">
+                      <span class="tag">رزرو آنلاین</span
+                      ><span class="tag">سالن زیبایی</span
+                      ><span class="tag">بازار دوطرفه</span>
+                    </div>
+                    <a
+                      class="match-link"
+                      href="https://www.fresha.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                      >مشاهده وب‌سایت ↗</a
+                    >
+                  </div>
+                </div>
+                <div class="match">
+                  <div class="company-logo">B</div>
+                  <div class="match-main">
+                    <div class="match-top">
+                      <strong>Booksy</strong
+                      ><span class="percent">شباهت متوسط رو به زیاد</span>
+                    </div>
+                    <p>
+                      رزرو خدمات زیبایی و مدیریت کسب‌وکار؛ برای مقایسه تجربه
+                      مشتری و ابزارهای ارائه‌دهنده خدمت.
+                    </p>
+                    <div class="tags">
+                      <span class="tag">رزرو</span
+                      ><span class="tag">مدیریت سالن</span
+                      ><span class="tag">کشف خدمات</span>
+                    </div>
+                    <a
+                      class="match-link"
+                      href="https://booksy.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                      >مشاهده وب‌سایت ↗</a
+                    >
+                  </div>
+                </div>
+                <div class="match">
+                  <div class="company-logo">M</div>
+                  <div class="match-main">
+                    <div class="match-top">
+                      <strong>Mindbody</strong
+                      ><span class="percent">شباهت متوسط</span>
+                    </div>
+                    <p>
+                      نرم‌افزار مدیریت و رزرو برای کسب‌وکارهای خدماتی؛ قابل
+                      بررسی از نظر مدیریت مشتری و عملیات.
+                    </p>
+                    <div class="tags">
+                      <span class="tag">مدیریت کسب‌وکار</span
+                      ><span class="tag">رزرو</span
+                      ><span class="tag">مشتریان</span>
+                    </div>
+                    <a
+                      class="match-link"
+                      href="https://www.mindbodyonline.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                      >مشاهده وب‌سایت ↗</a
+                    >
+                  </div>
+                </div>
+                <div class="callout">
+                  <strong>چرا این سه مورد؟</strong>در نسخه واقعی، هر انتخاب باید
+                  با ابعاد شباهت و منبع قابل بررسی همراه باشد. برچسب‌های بالا
+                  صرفاً برای نمایش رابط کاربری هستند و امتیاز محاسبه‌شده نیستند.
+                </div>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <div class="panel-title">خلاصه مدل کسب‌وکار</div>
+                  <div class="panel-desc">
+                    ساختار اولیه استخراج‌شده از پاسخ‌ها
+                  </div>
+                </div>
+                <span class="step">پروفایل ایده</span>
+              </div>
+              <div class="panel-body" id="profileSummary">
+                <div class="field">
+                  <label class="field-label">مشتری هدف</label>
+                  <div class="tag">مشتریان و سالن‌های زیبایی</div>
+                </div>
+                <div class="field">
+                  <label class="field-label">ارزش پیشنهادی</label>
+                  <div style="font-size: 12px; color: var(--muted)">
+                    کشف خدمات، مشاهده نمونه‌کار و رزرو راحت‌تر
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">مدل درآمدی</label>
+                  <div class="tag">اشتراک + کمیسیون</div>
+                </div>
+                <div class="field">
+                  <label class="field-label">بازار اولیه</label>
+                  <div class="tag">ایران · مشهد</div>
+                </div>
+                <div class="field">
+                  <label class="field-label">تمایز پیشنهادی</label>
+                  <div
+                    style="font-size: 12px; color: var(--muted)"
+                    id="profileDifference"
+                  >
+                    تمرکز بر بازار محلی و تجربه ساده‌تر
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <span class="mini-badge"
+                  >✓ موارد نامشخص باید جداگانه آزمایش شوند</span
+                >
+              </div>
+            </section>
+          </div>
+          <section class="panel insight-section">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">جمع‌بندی تحلیلی</div>
+                <div class="panel-desc">
+                  واقعیت مستند، تحلیل و فرضیه را از هم جدا می‌کنیم.
+                </div>
+              </div>
+              <span class="step">پیشنهاد برای تصمیم‌گیری</span>
+            </div>
+            <div class="panel-body">
+              <div class="tabs" role="tablist">
+                <button class="tab active" data-tab="all">همه موارد</button
+                ><button class="tab" data-tab="good">نقاط قوت</button
+                ><button class="tab" data-tab="risk">ریسک‌ها</button
+                ><button class="tab" data-tab="maybe">فرضیه‌ها</button>
+              </div>
+              <div class="insight-list" id="insightList">
+                <article class="insight good" data-type="good">
+                  <div class="insight-icon">✓</div>
+                  <div>
+                    <strong>مسئله برای مشتری قابل فهم است</strong>
+                    <p>
+                      کم کردن اصطکاک پیدا کردن خدمت و هماهنگی نوبت می‌تواند ارزش
+                      پیشنهادی روشنی باشد؛ میزان اهمیت آن باید با مصاحبه مشتری
+                      سنجیده شود.
+                    </p>
+                    <div class="evidence">
+                      نوع: تحلیل اولیه · هنوز شواهد مشتری جمع‌آوری نشده
+                    </div>
+                  </div>
+                </article>
+                <article class="insight risk" data-type="risk">
+                  <div class="insight-icon">!</div>
+                  <div>
+                    <strong>شروع بازار دوطرفه دشوار است</strong>
+                    <p>
+                      برای اینکه پلتفرم برای مشتری جذاب باشد باید خدمات‌دهنده
+                      کافی داشته باشد؛ و جذب سالن‌ها هم به وجود مشتری وابسته
+                      است.
+                    </p>
+                    <div class="evidence">
+                      نوع: ریسک مدل کسب‌وکار · نیازمند طراحی برنامه جذب اولیه
+                    </div>
+                  </div>
+                </article>
+                <article class="insight risk" data-type="risk">
+                  <div class="insight-icon">!</div>
+                  <div>
+                    <strong>رقابت فقط با امکانات بیشتر برنده نمی‌شود</strong>
+                    <p>
+                      باید مشخص شود چرا سالن یا مشتری از راهکارهای فعلی به محصول
+                      جدید مهاجرت می‌کند؛ مثلاً دایرکت، تماس یا ابزارهای موجود.
+                    </p>
+                    <div class="evidence">
+                      نوع: پرسش رقابتی · پاسخ هنوز تأیید نشده
+                    </div>
+                  </div>
+                </article>
+                <article class="insight maybe" data-type="maybe">
+                  <div class="insight-icon">?</div>
+                  <div>
+                    <strong>آیا سالن‌ها حاضرند اشتراک پرداخت کنند؟</strong>
+                    <p>
+                      با ۵ تا ۱۰ سالن مصاحبه کن و قبل از توسعه کامل، یک پیشنهاد
+                      پولی آزمایشی ارائه بده.
+                    </p>
+                    <div class="evidence">
+                      نوع: فرضیه اعتبارسنجی‌نشده · آزمایش پیشنهادی
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="report-actions">
+                <button class="btn btn-primary" id="nextStepsBtn">
+                  پیشنهاد آزمایش‌های بعدی ←</button
+                ><button class="btn btn-outline" id="copyBtn">
+                  کپی خلاصه گزارش</button
+                ><button class="btn btn-outline new-analysis" id="newBtn">
+                  ＋ تحلیل ایده جدید
+                </button>
+              </div>
+              <p class="disclaimer">
+                توجه: این خروجی برای نمایش MVP است. در نسخه واقعی، ادعاهای مربوط
+                به کسب‌وکارها باید با منابع معتبر و تاریخ دسترسی پشتیبانی شوند.
+                این گزارش پیش‌بینی قطعی موفقیت نیست.
+              </p>
+            </div>
+          </section>
+        </section>
+        <section id="placeholderView" style="display: none">
+          <div class="panel">
+            <div class="panel-body">
+              <div class="eyebrow">بخش نمونه</div>
+              <h1 id="placeholderTitle">بانک کسب‌وکارها</h1>
+              <p class="subtitle" id="placeholderText">
+                این بخش در نسخه نمایشی فقط برای نمایش ساختار محصول است.
+              </p>
+              <button
+                class="btn btn-primary"
+                id="placeholderBack"
+                style="margin-top: 20px"
+              >
+                بازگشت به تحلیل ایده ←
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script>
+      const $ = (s) => document.querySelector(s),
+        $$ = (s) => document.querySelectorAll(s);
+      const idea = $("#idea");
+      function persianNum(n) {
+        return String(n).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
+      }
+      function toast(msg) {
+        const el = $("#toast");
+        el.textContent = msg;
+        el.classList.add("show");
+        setTimeout(() => el.classList.remove("show"), 2600);
+      }
+      function show(view) {
+        $("#homeView").style.display = view === "home" ? "block" : "none";
+        $("#questionView").style.display =
+          view === "questions" ? "block" : "none";
+        $("#resultsView").classList.toggle("show", view === "results");
+        $("#placeholderView").style.display = [
+          "library",
+          "method",
+          "feedback",
+        ].includes(view)
+          ? "block"
+          : "none";
+        $("#crumb-current").textContent =
+          {
+            home: "تحلیل ایده جدید",
+            questions: "تکمیل اطلاعات",
+            results: "گزارش تحلیل",
+            library: "بانک کسب‌وکارها",
+            method: "روش تحلیل",
+            feedback: "بازخورد استاد",
+          }[view] || "تحلیل ایده جدید";
+        $$(".nav button").forEach((b) =>
+          b.classList.toggle(
+            "active",
+            b.dataset.view === view ||
+              (view === "questions" && b.dataset.view === "home"),
+          ),
+        );
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      idea.addEventListener(
+        "input",
+        () =>
+          ($("#charCount").textContent =
+            persianNum(idea.value.length) + " کاراکتر"),
+      );
+      $$("[data-idea]").forEach((b) =>
+        b.addEventListener("click", () => {
+          idea.value = b.dataset.idea;
+          idea.dispatchEvent(new Event("input"));
+        }),
+      );
+      $("#exampleBtn").addEventListener("click", () => {
+        idea.value =
+          "یک پلتفرم برای سالن‌های زیبایی که مشتری بتواند نمونه‌کارها را ببیند، خدمات را مقایسه کند و آنلاین نوبت بگیرد. درآمد از اشتراک سالن‌ها و کمیسیون رزرو است. در آینده شاید پیش‌نمایش مدل مو با هوش مصنوعی هم اضافه شود.";
+        idea.dispatchEvent(new Event("input"));
+        idea.focus();
+      });
+      $("#startBtn").addEventListener("click", () => {
+        if (idea.value.trim().length < 12) {
+          toast(
+            "اول ایده‌ات رو کمی بیشتر توضیح بده یا یک ایده نمونه انتخاب کن.",
+          );
+          idea.focus();
+          return;
+        }
+        $("#loading").classList.add("show");
+        $("#startBtn").disabled = true;
+        setTimeout(() => {
+          $("#loading").classList.remove("show");
+          $("#startBtn").disabled = false;
+          $("#questionIdeaName").textContent =
+            idea.value.trim().slice(0, 100) +
+            (idea.value.length > 100 ? "…" : "");
+          show("questions");
+        }, 750);
+      });
+      $("#backBtn").addEventListener("click", () => show("home"));
+      $("#analyzeBtn").addEventListener("click", () => {
+        const revenue = $("#revenue").value,
+          diff = $("#difference").value.trim();
+        $("#profileDifference").textContent =
+          diff || "هنوز مشخص نشده؛ نیازمند بررسی بیشتر";
+        const selected = document.querySelector(
+          'input[name="customer"]:checked',
+        );
+        const customer = selected ? selected.value : "مشخص نشده";
+        $("#profileSummary").querySelector(".field .tag").textContent =
+          customer === "کسب‌وکارها"
+            ? "سالن‌ها و ارائه‌دهندگان خدمت"
+            : "مشتریان نهایی و ارائه‌دهندگان خدمت";
+        const revenueTags =
+          $("#profileSummary").querySelectorAll(".field .tag");
+        if (revenueTags[1]) revenueTags[1].textContent = revenue;
+        $("#resultSubtitle").textContent =
+          "بازار هدف: " +
+          $("#market").value +
+          " · مرحله: " +
+          $("#stage").value +
+          " · خروجی آزمایشی";
+        show("results");
+      });
+      $$("[data-tab]").forEach((b) =>
+        b.addEventListener("click", () => {
+          $$("[data-tab]").forEach((x) =>
+            x.classList.toggle("active", x === b),
+          );
+          $$("#insightList .insight").forEach(
+            (item) =>
+              (item.style.display =
+                b.dataset.tab === "all" || item.dataset.type === b.dataset.tab
+                  ? "flex"
+                  : "none"),
+          );
+        }),
+      );
+      $("#newBtn").addEventListener("click", () => {
+        idea.value = "";
+        idea.dispatchEvent(new Event("input"));
+        show("home");
+      });
+      $("#copyBtn").addEventListener("click", async () => {
+        const text =
+          "خلاصه گزارش ایده کسب‌وکار\nایده: " +
+          idea.value +
+          "\nبازار هدف: " +
+          $("#market").value +
+          "\nمدل درآمدی: " +
+          $("#revenue").value +
+          "\nتمایز: " +
+          ($("#difference").value || "نامشخص") +
+          "\n\nنمونه‌های نمایشی: Fresha، Booksy، Mindbody\n\nتوجه: این گزارش نمونه است و ادعاها باید با منابع معتبر بررسی شوند.";
+        try {
+          await navigator.clipboard.writeText(text);
+          toast("خلاصه گزارش کپی شد.");
+        } catch (e) {
+          toast("امکان کپی خودکار نبود؛ می‌توانی متن را از صفحه برداری.");
+        }
+      });
+      $("#downloadBtn").addEventListener("click", () => {
+        const report =
+          "گزارش آزمایشی تحلیل ایده\n\nایده:\n" +
+          idea.value +
+          "\n\nبازار هدف: " +
+          $("#market").value +
+          "\nمدل درآمدی: " +
+          $("#revenue").value +
+          "\nتمایز: " +
+          ($("#difference").value || "نامشخص") +
+          "\n\nنمونه‌های نمایشی: Fresha، Booksy، Mindbody\n\nاین فایل خروجی نمونه است و محتوای آن باید با شواهد واقعی بررسی شود.";
+        const blob = new Blob(["\ufeff" + report], {
+          type: "text/plain;charset=utf-8",
+        });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "business-idea-demo-report.txt";
+        a.click();
+        URL.revokeObjectURL(a.href);
+        toast("فایل نمونه گزارش آماده شد.");
+      });
+      $("#nextStepsBtn").addEventListener("click", () =>
+        toast("آزمایش پیشنهادی: مصاحبه با ۵ تا ۱۰ مشتری و ثبت شواهد."),
+      );
+      $("#helpBtn").addEventListener("click", () =>
+        toast(
+          "این پروتوتایپ فقط ظاهر و جریان کار را شبیه‌سازی می‌کند؛ داده‌ها ساختگی‌اند.",
+        ),
+      );
+      $("#placeholderBack").addEventListener("click", () => show("home"));
+      $$(".nav button").forEach((b) =>
+        b.addEventListener("click", () => {
+          const v = b.dataset.view;
+          if (v === "home") show("home");
+          else if (v === "results") {
+            if ($("#resultsView").classList.contains("show")) show("results");
+            else toast("برای دیدن گزارش، ابتدا یک تحلیل نمونه بساز.");
+          } else {
+            show(v);
+            $("#placeholderTitle").textContent = {
+              library: "بانک کسب‌وکارها",
+              method: "روش تحلیل",
+              feedback: "بازخورد استاد",
+            }[v];
+            $("#placeholderText").textContent = {
+              library:
+                "در نسخه واقعی، پروفایل شرکت‌ها، مدل درآمدی، منابع و تاریخ آخرین بررسی در این بخش مدیریت می‌شوند.",
+              method:
+                "ایده ابتدا ساختاریافته می‌شود؛ سپس نمونه‌ها بازیابی و رتبه‌بندی می‌شوند و تحلیل نهایی با شواهد و محدودیت‌ها ارائه می‌شود.",
+              feedback:
+                "استاد می‌تواند ارتباط نمونه‌های مشابه، کیفیت منابع و مفید بودن پیشنهادها را ارزیابی کند.",
+            }[v];
+          }
+        }),
+      );
+    </script>
+  </body>
+</html>
